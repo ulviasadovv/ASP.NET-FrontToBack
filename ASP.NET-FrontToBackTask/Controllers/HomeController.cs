@@ -1,5 +1,6 @@
 ﻿using ASP.NET_FrontToBackTask.Contexts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace ASP.NET_FrontToBackTask.Controllers
@@ -14,11 +15,18 @@ namespace ASP.NET_FrontToBackTask.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var sliders = _context.Sliders.ToList();
+            var sliders = await _context.Sliders.ToListAsync();
+            var shippings = await _context.Shippings.ToListAsync();
 
-            return View(sliders);
+            HomeViewModel homeViewModel = new HomeViewModel
+            {
+                Sliders = sliders,
+                Shippings = shippings
+            };
+
+            return View(homeViewModel);
         }
     }
 }

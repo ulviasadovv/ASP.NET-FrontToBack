@@ -11,5 +11,6 @@ namespace ASP.NET_FrontToBackTask.Contexts
         }
 
         public DbSet<Slider> Sliders { get; set; } = null!;
+        public DbSet<Shipping> Shippings {  get; set; } = null!;
     }
 }
